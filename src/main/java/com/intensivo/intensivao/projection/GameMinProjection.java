@@ -5,7 +5,7 @@ public interface GameMinProjection {
 	//essa classe serve como consulta personalizada para a JPA
 	Long getId();
 	String getTitulo();
-	Integer getAno();
+	Integer getGameYear();
 	String getImgUrl();
 	String getDescCurto();
 	Integer getPosicao();

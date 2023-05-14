@@ -11,7 +11,7 @@ import com.intensivo.intensivao.projection.GameMinProjection;
 public interface GameRepository extends JpaRepository<Game,Long> {
 	
 	@Query(nativeQuery = true, value = """
-			SELECT tb_game.id, tb_game.titulo, tb_game.game_year AS `ano`, tb_game.img_url AS imgUrl,
+			SELECT tb_game.id, tb_game.titulo, tb_game.game_year AS gameYear, tb_game.img_url AS imgUrl,
 			tb_game.desc_curto AS descCurto, tb_belonging.posicao
 			FROM tb_game
 			INNER JOIN tb_belonging ON tb_game.id = tb_belonging.game_id
