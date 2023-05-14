@@ -1,6 +1,7 @@
 package com.intensivo.intensivao.dto;
 
 import com.intensivo.intensivao.model.Game;
+import com.intensivo.intensivao.projection.GameMinProjection;
 
 public class GameMinDTO {
 	private Long id;
@@ -19,6 +20,14 @@ public class GameMinDTO {
 		ano = entity.getAno();
 		imgUrl = entity.getImgUrl();
 		descCurto = entity.getDescCurto();
+	}
+	
+	public GameMinDTO(GameMinProjection projection) {
+		id = projection.getId();
+		titulo = projection.getTitulo();
+		ano = projection.getAno();
+		imgUrl = projection.getImgUrl();
+		descCurto = projection.getDescCurto();
 	}
 
 	/*Getters*/

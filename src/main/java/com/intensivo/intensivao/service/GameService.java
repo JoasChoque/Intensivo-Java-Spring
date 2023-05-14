@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.intensivo.intensivao.dto.GameDTO;
 import com.intensivo.intensivao.dto.GameMinDTO;
 import com.intensivo.intensivao.model.Game;
+import com.intensivo.intensivao.projection.GameMinProjection;
 import com.intensivo.intensivao.repository.GameRepository;
 
 @Service
@@ -36,5 +37,11 @@ public class GameService {
 		//precisa do get porque retorna um optional
 		Game result = gameRepository.findById(id).get();				
 		return new GameDTO(result);
+	}
+	
+	@Transactional
+	public List<GameMinDTO> findByList(Long listId){
+		List<GameMinProjection> result = gameRepository.searchByList(listId);
+		return result.stream().map(x-> new GameMinDTO(x)).toList();
 	}
 }
