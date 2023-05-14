@@ -28,6 +28,7 @@ public class Game {
 	private String plataforma;
 	private Double pontuacao;
 	
+	//anotação usada para poder passar o valor de 255 do varchar no banco de dados!
 	@Column(columnDefinition = "TEXT")
 	private String descCurto;
 	
