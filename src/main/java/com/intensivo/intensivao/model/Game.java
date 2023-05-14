@@ -23,25 +23,28 @@ public class Game {
 	@Column(name = "game_year")
 	private Integer ano;
 	
-	
 	private String genero;
 	private String imgUrl;
+	private String plataforma;
+	private Double pontuacao;
+	
+	@Column(columnDefinition = "TEXT")
 	private String descCurto;
+	
+	@Column(columnDefinition = "TEXT")
 	private String descLong;
 	
-	
-	
-	public Game(){
-		
-	}
+	public Game(){}
 
 	/*Opcional, serve apenas para instanciar outro game*/
-	public Game(Long id, String titulo, Integer ano, String genero, String imgUrl, String descCurto, String descLong) {
+	public Game(Long id, String titulo, Integer ano, String genero, String imgUrl,String plataforma,Double pontuacao, String descCurto, String descLong) {
 		this.id = id;
 		this.titulo = titulo;
 		this.ano = ano;
 		this.genero = genero;
 		this.imgUrl = imgUrl;
+		this.plataforma = plataforma;
+		this.pontuacao=pontuacao;
 		this.descCurto = descCurto;
 		this.descLong = descLong;
 	}
@@ -101,6 +104,22 @@ public class Game {
 
 	public void setDescLong(String descLong) {
 		this.descLong = descLong;
+	}
+	
+	public String getPlataforma() {
+		return plataforma;
+	}
+
+	public void setPlataforma(String plataforma) {
+		this.plataforma = plataforma;
+	}
+
+	public Double getPontuacao() {
+		return pontuacao;
+	}
+
+	public void setPontuacao(Double pontuacao) {
+		this.pontuacao = pontuacao;
 	}
 
 	//metodos para comparar um objeto com outro
