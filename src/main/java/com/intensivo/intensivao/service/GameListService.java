@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.intensivo.intensivao.dto.GameListDTO;
 import com.intensivo.intensivao.model.GameList;
+import com.intensivo.intensivao.projection.GameMinProjection;
 import com.intensivo.intensivao.repository.GameListRepository;
+import com.intensivo.intensivao.repository.GameRepository;
 
 @Service
 public class GameListService {
@@ -16,9 +18,30 @@ public class GameListService {
 	@Autowired
 	private GameListRepository gameListRepository;
 	
-	@Transactional
+	@Autowired 
+	private GameRepository gameRepository;
+	
+	@Transactional(readOnly = true)
 	public List<GameListDTO> findAll(){
 		List<GameList> result = gameListRepository.findAll();
 		return result.stream().map(x-> new GameListDTO(x)).toList();
+	}
+	
+	//movendo a lista para criar a classificação
+	@Transactional
+	public void move(Long listId, int sourceIndex, int destinationIndex) {
+		List<GameMinProjection> list = gameRepository.searchByList(listId);
+		
+		GameMinProjection obj = list.remove(sourceIndex);
+		
+		list.add(destinationIndex,obj);
+		
+		int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex;
+		int max = sourceIndex < destinationIndex ? destinationIndex : sourceIndex;
+		
+		for(int i= min;i<=max;i++) {
+			//passar id da lista/pegar id do objeto/posição a ser inserida
+			gameListRepository.updateBelongingPosition(listId, list.get(i).getId(),i);
+		}
 	}
 }
